@@ -3,13 +3,14 @@ import { Header, Button, Table, Divider, Icon } from 'semantic-ui-react';
 import { v4 as uuidv4 } from 'uuid';
 import EditForm from './EditForm';
 import TableFormRows from './TableFormRows';
+import ExportExcel from './ExportExcel';
 import { SavedContext } from './TablesSaved';
 
 export const TableContext = React.createContext();
 
 const LOCAL_STORAGE_KEY = 'stringingReport.tableRows';
 
-export default function TableForm({ tableId }) {
+export default function TableForm({ tables, setTables, tableId }) {
   const { handleTableSelect } = useContext(SavedContext);
   const [selectedRowId, setSelectedRowId] = useState();
   const [rows, setRows] = useState([]);
@@ -74,16 +75,45 @@ export default function TableForm({ tableId }) {
     );
   }
 
+  function handleTableDelete(id) {
+    if (selectedRowId != null && selectedRowId === id) {
+      setSelectedRowId(undefined);
+    }
+    setRows(
+      rows.filter((row) => {
+        return row.tableId !== id;
+      })
+    );
+    setTables(
+      tables.filter((table) => {
+        return table.id !== id;
+      })
+    );
+  }
+
   return (
     <TableContext.Provider value={tableContextValue}>
       <div>
         <br />
+        <Button
+          icon
+          floated="left"
+          onClick={() => handleTableSelect(undefined)}
+        >
+          <Icon name="home" />
+        </Button>
+        <Button
+          color="red"
+          floated="right"
+          onClick={() => handleTableDelete(tableId)}
+        >
+          <Icon name="table" />
+          Delete Table
+        </Button>
+        <ExportExcel tableId={tableId} />
         <Header textAlign="center" as="h1">
           Stringing Report
         </Header>
-        <Button icon onClick={() => handleTableSelect(undefined)}>
-          <Icon name="home" />
-        </Button>
         <Divider />
         {selectedRow && <EditForm row={selectedRow} {...selectedRow} />}
         {!selectedRow && (
@@ -99,7 +129,7 @@ export default function TableForm({ tableId }) {
             </Button>
             <br />
             <br />
-            <Table celled compact definition>
+            <Table celled compact definition id={tableId}>
               <Table.Header>
                 <Table.Row>
                   <Table.HeaderCell />

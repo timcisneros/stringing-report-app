@@ -1,0 +1,31 @@
+#export-button {
+  /* visibility: hidden; */
+  background-color: #4caf50; /* Green */
+  border: none;
+  color: white;
+  padding: 2.5px 18px;
+  border-radius: 3px;
+  margin-left: 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+#export-button:hover {
+  background-color: #4bac4e; /* Green */
+}
+
+#export-button:active {
+  background-color: #3f8d42;
+}
+
+#export-button::before {
+  content: url('../img/icons8-microsoft_excel.png');
+  margin-right: 5px;
+  margin-top: 4px;
+}

@@ -83,7 +83,13 @@ export default function TablesSaved() {
             </Table>
           </Segment>
         )}
-        {selectedTable && <TableForm tableId={selectedTable.id} />}
+        {selectedTable && (
+          <TableForm
+            tables={tables}
+            setTables={setTables}
+            tableId={selectedTable.id}
+          />
+        )}
       </Container>
     </SavedContext.Provider>
   );
