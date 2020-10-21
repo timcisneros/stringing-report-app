@@ -88,12 +88,24 @@ export default function TableForm({ tables, setTables, tableId }) {
     if (selectedRowId != null && selectedRowId === id) {
       setSelectedRowId(undefined);
     }
-    console.log(filteredRows);
-    setTables(
-      tables.filter((table) => {
-        return table.id !== id;
-      })
-    );
+    const deleteTables = async (id) => {
+      await deleteRows(id);
+      setTables(
+        tables.filter((table) => {
+          console.log('run2', id);
+          return table.id !== id;
+        })
+      );
+    };
+    const deleteRows = async (id) => {
+      setRows(
+        rows.filter((row) => {
+          console.log('run1', id);
+          return row.tableId !== id;
+        })
+      );
+    };
+    deleteTables(id);
   }
 
   return (
