@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Table, Icon, Container, Button, Segment } from 'semantic-ui-react';
+import {
+  Message,
+  Table,
+  Icon,
+  Container,
+  Button,
+  Segment,
+} from 'semantic-ui-react';
 import TablesSavedRows from './TablesSavedRows';
 import { v4 as uuidv4 } from 'uuid';
 import TableForm from './TableForm';
@@ -66,7 +73,7 @@ export default function TablesSaved() {
         {!selectedTable && (
           <Segment padded>
             <Button floated="right" onClick={handleTableAdd}>
-              <Icon name="file" />
+              <Icon name="table" />
               New Table
             </Button>
             <br />
@@ -76,6 +83,18 @@ export default function TablesSaved() {
                 <Table.Row>
                   <Table.HeaderCell colSpan="5">Saved Tables</Table.HeaderCell>
                 </Table.Row>
+                {tables.length < 1 && (
+                  <Table.Row>
+                    <Table.Cell>
+                      <Message
+                        info
+                        icon="exclamation"
+                        header="No tables have been added yet."
+                        content="Click on the New Table button to get started."
+                      />
+                    </Table.Cell>
+                  </Table.Row>
+                )}
               </Table.Header>
               <Table.Body>
                 <TablesSavedRows tables={tables} />

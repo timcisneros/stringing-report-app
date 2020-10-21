@@ -89,6 +89,7 @@ export default function EditForm({
             onChange={(e) => handleChange({ comments: e.target.value })}
           />
         </Form.Field>
+        <br />
         <Button
           color="green"
           type="submit"
@@ -109,6 +110,9 @@ export default function EditForm({
           Delete Row
         </Button>
       </Form>
+      <br />
+      <br />
+      <br />
     </div>
   );
 }

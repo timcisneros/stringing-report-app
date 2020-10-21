@@ -1,6 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Header, Button, Table, Divider, Icon } from 'semantic-ui-react';
+import {
+  Segment,
+  Message,
+  Header,
+  Button,
+  Table,
+  Icon,
+} from 'semantic-ui-react';
 import { v4 as uuidv4 } from 'uuid';
+import TimeStamp from 'react-timestamp';
 import EditForm from './EditForm';
 import TableFormRows from './TableFormRows';
 import ExportExcel from './ExportExcel';
@@ -16,11 +24,12 @@ export default function TableForm({ tables, setTables, tableId }) {
   const [rows, setRows] = useState([]);
   const selectedRow = rows.find((row) => row.id === selectedRowId);
   const filteredRows = rows.filter((row) => row.tableId === tableId);
+  const selectedTableData = tables.find((table) => table.id === tableId);
 
   useEffect(() => {
     const rowJSON = localStorage.getItem(LOCAL_STORAGE_KEY);
     if (rowJSON != null) setRows(JSON.parse(rowJSON));
-  }, [tableId]);
+  }, []);
 
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(rows));
@@ -79,11 +88,7 @@ export default function TableForm({ tables, setTables, tableId }) {
     if (selectedRowId != null && selectedRowId === id) {
       setSelectedRowId(undefined);
     }
-    setRows(
-      rows.filter((row) => {
-        return row.tableId !== id;
-      })
-    );
+    console.log(filteredRows);
     setTables(
       tables.filter((table) => {
         return table.id !== id;
@@ -94,61 +99,76 @@ export default function TableForm({ tables, setTables, tableId }) {
   return (
     <TableContext.Provider value={tableContextValue}>
       <div>
-        <br />
-        <Button
-          icon
-          floated="left"
-          onClick={() => handleTableSelect(undefined)}
-        >
-          <Icon name="home" />
-        </Button>
-        <Button
-          color="red"
-          floated="right"
-          onClick={() => handleTableDelete(tableId)}
-        >
-          <Icon name="table" />
-          Delete Table
-        </Button>
-        <ExportExcel tableId={tableId} />
-        <Header textAlign="center" as="h1">
-          Stringing Report
-        </Header>
-        <Divider />
-        {selectedRow && <EditForm row={selectedRow} {...selectedRow} />}
-        {!selectedRow && (
-          <>
-            <Button
-              color="green"
-              floated="right"
-              type="submit"
-              onClick={handleRowAdd}
-            >
-              <Icon name="plus" />
-              Add Row
-            </Button>
-            <br />
-            <br />
-            <Table celled compact definition id={tableId}>
-              <Table.Header>
-                <Table.Row>
-                  <Table.HeaderCell />
-                  <Table.HeaderCell>Label</Table.HeaderCell>
-                  <Table.HeaderCell>Size</Table.HeaderCell>
-                  <Table.HeaderCell>Length</Table.HeaderCell>
-                  <Table.HeaderCell>Wall</Table.HeaderCell>
-                  <Table.HeaderCell>Grade</Table.HeaderCell>
-                  <Table.HeaderCell>Heat #</Table.HeaderCell>
-                  <Table.HeaderCell>P.O. #</Table.HeaderCell>
-                  <Table.HeaderCell>Comments</Table.HeaderCell>
-                </Table.Row>
-              </Table.Header>
-              <Table.Body>
-                <TableFormRows rows={filteredRows} />
-              </Table.Body>
-            </Table>
-          </>
-        )}
+        <Segment padded>
+          <br />
+          <Button
+            icon
+            floated="left"
+            onClick={() => handleTableSelect(undefined)}
+          >
+            <Icon name="home" />
+          </Button>
+          <Button
+            color="red"
+            floated="right"
+            onClick={() => handleTableDelete(tableId)}
+          >
+            <Icon name="table" />
+            Delete Table
+          </Button>
+          <ExportExcel tableId={tableId} />
+          <Header textAlign="center" as="h3" dividing>
+            <Header.Content>
+              Stringing Report: <TimeStamp date={selectedTableData.created} />
+            </Header.Content>
+          </Header>
+          {selectedRow && <EditForm row={selectedRow} {...selectedRow} />}
+          {!selectedRow && (
+            <>
+              <Button
+                color="green"
+                floated="right"
+                type="submit"
+                onClick={handleRowAdd}
+              >
+                <Icon name="plus" />
+                Add Row
+              </Button>
+              <br />
+              <br />
+              <Table celled compact striped definition id={tableId}>
+                <Table.Header>
+                  <Table.Row>
+                    <Table.HeaderCell />
+                    <Table.HeaderCell>Label</Table.HeaderCell>
+                    <Table.HeaderCell>Size</Table.HeaderCell>
+                    <Table.HeaderCell>Length</Table.HeaderCell>
+                    <Table.HeaderCell>Wall</Table.HeaderCell>
+                    <Table.HeaderCell>Grade</Table.HeaderCell>
+                    <Table.HeaderCell>Heat #</Table.HeaderCell>
+                    <Table.HeaderCell>P.O. #</Table.HeaderCell>
+                    <Table.HeaderCell>Comments</Table.HeaderCell>
+                  </Table.Row>
+                  {filteredRows.length < 1 && (
+                    <Table.Row>
+                      <Table.Cell colSpan="9">
+                        <Message
+                          info
+                          icon="exclamation"
+                          header="No rows have been added yet."
+                          content="Click on the Add Row button to get started."
+                        />
+                      </Table.Cell>
+                    </Table.Row>
+                  )}
+                </Table.Header>
+                <Table.Body>
+                  <TableFormRows rows={filteredRows} />
+                </Table.Body>
+              </Table>
+            </>
+          )}
+        </Segment>
       </div>
     </TableContext.Provider>
   );
