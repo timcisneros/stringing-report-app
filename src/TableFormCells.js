@@ -25,10 +25,12 @@ export default function TableFormCells({
           <Icon name="trash" />
         </Button> */}
       </Table.Cell>
+
       <Table.Cell>{`${ftjt}-${label}`}</Table.Cell>
       <Table.Cell>{size}</Table.Cell>
       <Table.Cell>{length}</Table.Cell>
       <Table.Cell>{wall}</Table.Cell>
+
       <Table.Cell>{grade}</Table.Cell>
       <Table.Cell>{heat}</Table.Cell>
       <Table.Cell>{po}</Table.Cell>

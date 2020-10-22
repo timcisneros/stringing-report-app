@@ -140,6 +140,7 @@ export default function EditForm({
             e.preventDefault();
             handleRowSelect(undefined);
           }}
+          size="large"
         >
           Done
         </Button>
@@ -149,6 +150,7 @@ export default function EditForm({
             e.preventDefault();
             handleRowDelete(id);
           }}
+          size="large"
         >
           Delete Row
         </Button>

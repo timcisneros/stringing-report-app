@@ -3,6 +3,7 @@ import { Segment, Header, Button, Table, Icon } from 'semantic-ui-react';
 import { v4 as uuidv4 } from 'uuid';
 import TimeStamp from 'react-timestamp';
 import EditForm from './EditForm';
+import TableFormHeaders from './TableFormHeaders';
 import TableFormRows from './TableFormRows';
 import ExportExcel from './ExportExcel';
 import HelpMessage from './HelpMessage';
@@ -145,17 +146,7 @@ export default function TableForm({ tables, setTables, tableId }) {
               <br />
               <Table celled compact striped definition id={tableId}>
                 <Table.Header>
-                  <Table.Row>
-                    <Table.HeaderCell />
-                    <Table.HeaderCell>JT / FT</Table.HeaderCell>
-                    <Table.HeaderCell>Size</Table.HeaderCell>
-                    <Table.HeaderCell>Length</Table.HeaderCell>
-                    <Table.HeaderCell>Wall</Table.HeaderCell>
-                    <Table.HeaderCell>Grade</Table.HeaderCell>
-                    <Table.HeaderCell>Heat #</Table.HeaderCell>
-                    <Table.HeaderCell>P.O. #</Table.HeaderCell>
-                    <Table.HeaderCell>Comments</Table.HeaderCell>
-                  </Table.Row>
+                  <TableFormHeaders />
                   {filteredRows.length < 1 && (
                     <Table.Row>
                       <Table.Cell colSpan="9">
