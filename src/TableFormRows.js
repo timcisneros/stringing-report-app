@@ -2,11 +2,11 @@ import React from 'react';
 import { Table } from 'semantic-ui-react';
 import TableFormCells from './TableFormCells';
 
-export default function TableFormRows({ rows }) {
+export default function TableFormRows({ rows, selectedOption }) {
   const tableRows = rows.map((row) => {
     return (
       <Table.Row key={row.id}>
-        <TableFormCells {...row} />
+        <TableFormCells {...row} selectedOption={selectedOption} />
       </Table.Row>
     );
   });

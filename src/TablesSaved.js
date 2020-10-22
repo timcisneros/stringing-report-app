@@ -1,15 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Message,
-  Table,
-  Icon,
-  Container,
-  Button,
-  Segment,
-} from 'semantic-ui-react';
+import { Table, Icon, Container, Button, Segment } from 'semantic-ui-react';
 import TablesSavedRows from './TablesSavedRows';
 import { v4 as uuidv4 } from 'uuid';
 import TableForm from './TableForm';
+import HelpMessage from './HelpMessage';
 
 export const SavedContext = React.createContext();
 
@@ -86,9 +80,7 @@ export default function TablesSaved() {
                 {tables.length < 1 && (
                   <Table.Row>
                     <Table.Cell>
-                      <Message
-                        info
-                        icon="exclamation"
+                      <HelpMessage
                         header="No tables have been added yet."
                         content="Click on the New Table button to get started."
                       />

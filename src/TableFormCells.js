@@ -4,6 +4,7 @@ import { TableContext } from './TableForm';
 
 export default function TableFormCells({
   id,
+  ftjt,
   label,
   size,
   length,
@@ -24,7 +25,7 @@ export default function TableFormCells({
           <Icon name="trash" />
         </Button> */}
       </Table.Cell>
-      <Table.Cell>{label}</Table.Cell>
+      <Table.Cell>{`${ftjt}-${label}`}</Table.Cell>
       <Table.Cell>{size}</Table.Cell>
       <Table.Cell>{length}</Table.Cell>
       <Table.Cell>{wall}</Table.Cell>

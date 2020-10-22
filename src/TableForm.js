@@ -1,17 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
-import {
-  Segment,
-  Message,
-  Header,
-  Button,
-  Table,
-  Icon,
-} from 'semantic-ui-react';
+import { Segment, Header, Button, Table, Icon } from 'semantic-ui-react';
 import { v4 as uuidv4 } from 'uuid';
 import TimeStamp from 'react-timestamp';
 import EditForm from './EditForm';
 import TableFormRows from './TableFormRows';
 import ExportExcel from './ExportExcel';
+import HelpMessage from './HelpMessage';
 import { SavedContext } from './TablesSaved';
 
 export const TableContext = React.createContext();
@@ -51,7 +45,8 @@ export default function TableForm({ tables, setTables, tableId }) {
   function handleRowAdd() {
     const newRow = {
       id: uuidv4(),
-      label: '',
+      ftjt: 'FT',
+      label: 1,
       size: 0,
       length: '',
       wall: '',
@@ -92,7 +87,7 @@ export default function TableForm({ tables, setTables, tableId }) {
       await deleteRows(id);
       setTables(
         tables.filter((table) => {
-          console.log('run2', id);
+          // console.log('run2', id);
           return table.id !== id;
         })
       );
@@ -100,7 +95,7 @@ export default function TableForm({ tables, setTables, tableId }) {
     const deleteRows = async (id) => {
       setRows(
         rows.filter((row) => {
-          console.log('run1', id);
+          // console.log('run1', id);
           return row.tableId !== id;
         })
       );
@@ -152,7 +147,7 @@ export default function TableForm({ tables, setTables, tableId }) {
                 <Table.Header>
                   <Table.Row>
                     <Table.HeaderCell />
-                    <Table.HeaderCell>Label</Table.HeaderCell>
+                    <Table.HeaderCell>JT / FT</Table.HeaderCell>
                     <Table.HeaderCell>Size</Table.HeaderCell>
                     <Table.HeaderCell>Length</Table.HeaderCell>
                     <Table.HeaderCell>Wall</Table.HeaderCell>
@@ -164,9 +159,7 @@ export default function TableForm({ tables, setTables, tableId }) {
                   {filteredRows.length < 1 && (
                     <Table.Row>
                       <Table.Cell colSpan="9">
-                        <Message
-                          info
-                          icon="exclamation"
+                        <HelpMessage
                           header="No rows have been added yet."
                           content="Click on the Add Row button to get started."
                         />

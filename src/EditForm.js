@@ -1,10 +1,22 @@
 import React, { useContext } from 'react';
-import { Form, Button } from 'semantic-ui-react';
+import { Form, Button, Input, Dropdown } from 'semantic-ui-react';
 import { TableContext } from './TableForm';
+
+const options = [
+  {
+    text: 'FT',
+    value: 'FT',
+  },
+  {
+    text: 'JT',
+    value: 'JT',
+  },
+];
 
 export default function EditForm({
   row,
   id,
+  ftjt,
   label,
   size,
   length,
@@ -26,67 +38,98 @@ export default function EditForm({
     <div>
       <Form>
         <Form.Field>
-          <label>Label</label>
-          <input
-            placeholder="Label"
+          <label>FT / JT</label>
+          <Input
+            type="number"
+            placeholder="#"
             value={label}
-            onChange={(e) => handleChange({ label: e.target.value })}
+            onChange={(e) => {
+              handleChange({ label: e.target.value });
+            }}
+            size="large"
+            action={
+              <Dropdown
+                button
+                basic
+                floating
+                options={options}
+                value={ftjt}
+                onChange={(e, data) => {
+                  handleChange({ ftjt: data.value });
+                }}
+              />
+            }
+            actionPosition="left"
           />
         </Form.Field>
         <Form.Field>
           <label>Size</label>
-          <input
+          <Input
+            type="text"
             placeholder="Size"
             value={size}
             onChange={(e) => handleChange({ size: e.target.value })}
+            size="large"
           />
         </Form.Field>
         <Form.Field>
           <label>Length</label>
-          <input
+          <Input
+            type="text"
             placeholder="Length"
             value={length}
             onChange={(e) => handleChange({ length: e.target.value })}
+            size="large"
           />
         </Form.Field>
         <Form.Field>
           <label>Wall</label>
-          <input
+          <Input
+            type="text"
             placeholder="Wall"
             value={wall}
             onChange={(e) => handleChange({ wall: e.target.value })}
+            size="large"
           />
         </Form.Field>
         <Form.Field>
           <label>Grade</label>
-          <input
+          <Input
+            type="text"
             placeholder="Grade"
             value={grade}
             onChange={(e) => handleChange({ grade: e.target.value })}
+            size="large"
           />
         </Form.Field>
         <Form.Field>
           <label>Heat #</label>
-          <input
+          <Input
+            type="text"
             placeholder="Heat #"
             value={heat}
             onChange={(e) => handleChange({ heat: e.target.value })}
+            size="large"
           />
         </Form.Field>
         <Form.Field>
           <label>P.O. #</label>
-          <input
+          <Input
+            type="text"
             placeholder="P.O. #"
             value={po}
             onChange={(e) => handleChange({ po: e.target.value })}
+            size="large"
           />
         </Form.Field>
         <Form.Field>
           <label>Comments</label>
-          <input
+          <Input
+            type="text"
             placeholder="Comments"
             value={comments}
             onChange={(e) => handleChange({ comments: e.target.value })}
+            size="large"
           />
         </Form.Field>
         <br />
