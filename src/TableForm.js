@@ -69,7 +69,7 @@ export default function TableForm({ tables, setTables, tableId }) {
         const newRow = {
             id: uuidv4(),
             ftjt: 'FT',
-            label: rows[rows.length - 1].label + 1,
+            label: Number(rows[rows.length - 1].label) + 1,
             size: rows[rows.length - 1].size,
             length: rows[rows.length - 1].length,
             wall: rows[rows.length - 1].wall,
