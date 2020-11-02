@@ -174,15 +174,17 @@ export default function TableForm({ tables, setTables, tableId }) {
                     )}
                     {!selectedRow && (
                         <>
-                            <Button
-                                color="blue"
-                                floated="right"
-                                type="submit"
-                                onClick={handleRowCopy}
-                            >
-                                <Icon name="copy" />
-                                Copy Last Row
-                            </Button>
+                            {filteredRows.length > 0 && (
+                                <Button
+                                    color="blue"
+                                    floated="right"
+                                    type="submit"
+                                    onClick={handleRowCopy}
+                                >
+                                    <Icon name="copy" />
+                                    Copy Last Row
+                                </Button>
+                            )}
                             <Button
                                 color="green"
                                 floated="right"
@@ -223,15 +225,17 @@ export default function TableForm({ tables, setTables, tableId }) {
                 </Segment>
                 {!selectedRow && (
                     <>
-                        <Button
-                            color="blue"
-                            floated="right"
-                            type="submit"
-                            onClick={handleRowCopy}
-                        >
-                            <Icon name="copy" />
-                            Copy Last Row
-                        </Button>
+                        {filteredRows.length > 0 && (
+                            <Button
+                                color="blue"
+                                floated="right"
+                                type="submit"
+                                onClick={handleRowCopy}
+                            >
+                                <Icon name="copy" />
+                                Copy Last Row
+                            </Button>
+                        )}
                         <Button
                             color="green"
                             floated="right"
