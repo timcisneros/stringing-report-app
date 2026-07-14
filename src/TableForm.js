@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Segment, Header, Button, Table, Icon } from 'semantic-ui-react';
 import { v4 as uuidv4 } from 'uuid';
-import TimeStamp from 'react-timestamp';
+import { formatDate } from './dateFormat';
 import EditForm from './EditForm';
 import TableFormHeaders from './TableFormHeaders';
 import TableFormRows from './TableFormRows';
@@ -166,7 +166,7 @@ export default function TableForm({ tables, setTables, tableId }) {
                     <Header textAlign="center" as="h3" dividing>
                         <Header.Content>
                             Stringing Report:{' '}
-                            <TimeStamp date={selectedTableData.created} />
+                            {formatDate(selectedTableData.created)}
                         </Header.Content>
                     </Header>
                     {selectedRow && (

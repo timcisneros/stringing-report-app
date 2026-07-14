@@ -31,6 +31,7 @@ npm install
 npm start
 ```
 
-The application was built with Create React App. Its dependency choices reflect
-the period in which it was completed; it is retained as project history rather
-than presented as the current portfolio architecture.
+The application UI reflects the period in which it was delivered. Its build
+boundary has since been moved from the obsolete Create React App toolchain to
+Vite, and the spreadsheet export no longer depends on an unmaintained wrapper.
+The workflow and interaction model remain unchanged.

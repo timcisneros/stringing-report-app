@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Table, Icon, Button } from 'semantic-ui-react';
-import TimeStamp from 'react-timestamp';
 import { SavedContext } from './TablesSaved';
+import { formatAge, formatDate } from './dateFormat';
 
 export default function TablesSavedRows({ tables }) {
   const { handleTableSelect } = useContext(SavedContext);
@@ -18,11 +18,11 @@ export default function TablesSavedRows({ tables }) {
           <Icon name="table" /> {table.title}
         </Table.Cell>
         <Table.Cell>
-          Created On: <TimeStamp date={table.created} />
+          Created On: {formatDate(table.created)}
         </Table.Cell>
         <Table.Cell collapsing>
           Last Edited:{' '}
-          <TimeStamp relative date={Date()} relativeTo={table.created} /> ago
+          {formatAge(table.created)} ago
         </Table.Cell>
       </Table.Row>
     );
